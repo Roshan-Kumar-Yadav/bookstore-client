@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-function Cards({ item }) {
-  console.log(item)
-  
+function Cards({ item, handleClick }) {
+  console.log(item);
+
   return (
     <>
     <div className="mt-4 my-3 p-4">
@@ -22,7 +23,8 @@ function Cards({ item }) {
     <p>{item.title}</p>
     <div className="card-actions justify-between">
       <div className="badge badge-outline px-2 py-3">INR {item.price}</div>
-      <div className="badge badge-outline px-2 py-3 hover:bg-pink-500 hover:text-white cursor-pointer">Buy Now</div>
+      <Link to="/bookinformation"
+      className="badge badge-outline px-2 py-3 hover:bg-pink-500 hover:text-white cursor-pointer">Read Now</Link>
     </div>
   </div>
 </div>

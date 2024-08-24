@@ -1,9 +1,23 @@
-import React from 'react';
-import Cards from "./Cards"
-import list from "../../src/list.json";
+import React, { useEffect, useState } from 'react';
+import Cards from "./Cards";
+import axios from "axios";
 import {Link} from "react-router-dom";
 
 function Course() {
+
+  const [book, setBook] = useState([])
+  useEffect(() =>{
+    const getBook = async() =>{
+        try {
+         const res = await axios.get("http://localhost:4001/book");
+         console.log(res.data)
+         setBook(res.data)
+        } catch (error) {
+          console.log(error)
+        }
+    }
+    getBook();
+  }, []);
 
   return (
     <>
@@ -13,7 +27,7 @@ function Course() {
       We're delighted to have you <span className="text-pink-500">Here</span>!
       </h1>
       <p className="mt-12">
-      We have divided our books collection into two parts "Free and Paid". Here in the Course section you can find out both types of Book. Either you can purchase the paid books by paying a certain amount or you can wait for the book to be free for a day where you can avail the opportunity without paying a single INR. Let's enjoy learning and grow together !!!
+      We have divided our books collection into two parts "Free and User". Here in the Course section you can find out both types of Books. Either you can Signup and Login to explore the Course or you can wait for the book to be free where you can avail the opportunity without Signing Up or Logging In. Let's enjoy learning and grow together !!!
       </p>
 
       <Link to="/">
@@ -23,11 +37,10 @@ function Course() {
       </Link>
      </div>
 
-<div className="mt-12 grid grid-cols-1 md:grid-cols-4">
-  {list.map((item)=>(
-        <Cards key={item.id} item={item} />
+<div className="mt-12 grid grid-cols-1 md:grid-cols-3">
+ {book.map((item)=>(
+        <Cards key={item.id} item={item}/>
    ))}
-
 </div>
 </div>
     </>
